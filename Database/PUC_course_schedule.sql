@@ -17,7 +17,7 @@ CREATE TABLE "SectionLocations" ("sectionLocationId" INTEGER PRIMARY KEY AUTOINC
 DROP TABLE IF EXISTS "SectionTimes";
 CREATE TABLE "SectionTimes" ("sectionTimeId" INTEGER PRIMARY KEY AUTOINCREMENT   NOT NULL , "sectionId" INTEGER, "day" TEXT, "timeStart" TEXT, "timeEnd" TEXT);
 DROP TABLE IF EXISTS "Sections";
-CREATE TABLE "Sections" ("sectionId" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , "termId" INTEGER, "CRN" TEXT,"courseId" INTEGER, "sectionNum" TEXT, "title" TEXT, "scheduleTypeId" INTEGER, "instructorId" INTEGER, "meetingStart " TEXT, "meetingEnd" TEXT, "enrlCap " INTEGER, "enrlAct" INTEGER, "waitCap" INTEGER, "waitAct" INTEGER, "isEXL" INTEGER, "isETIE" INTEGER, "isTransferIN" INTEGER, "isCanceled" INTEGER, "isOnline" INTEGER, "isSIA" INTEGER, "textBookLink" TEXT,"CRNLink" TEXT,"notes" TEXT);
+CREATE TABLE "Sections" ("sectionId" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , "termId" INTEGER, "CRN" TEXT,"courseId" INTEGER, "sectionNum" TEXT, "title" TEXT, "scheduleTypeId" INTEGER, "instructorId" INTEGER, "meetingStart" TEXT, "meetingEnd" TEXT, "enrlCap" INTEGER, "enrlAct" INTEGER, "waitCap" INTEGER, "waitAct" INTEGER, "isEXL" INTEGER, "isETIE" INTEGER, "isTransferIN" INTEGER, "isCanceled" INTEGER, "isOnline" INTEGER, "isSIA" INTEGER, "textBookLink" TEXT,"CRNLink" TEXT,"notes" TEXT);
 DROP TABLE IF EXISTS "Subjects";
 CREATE TABLE "Subjects" ("subjectId" INTEGER PRIMARY KEY AUTOINCREMENT   NOT NULL , "subject" TEXT);
 DROP TABLE IF EXISTS "Terms";
