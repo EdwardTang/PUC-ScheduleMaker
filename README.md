@@ -8,14 +8,16 @@ This project involves redesign of the PUC online class schedule application. The
   Based on the study of data provided by instructor, the unified schema (ERD) for class schedule is created, shown as the following: 
   ![alt text](https://github.com/EdwardTang/PUC-ScheduleMaker/blob/master/Data%20Model/ITS462_data_model.jpg)
 
-# Data Dictionary
+## Data Dictionary
 
+### Subject
 | Entity Name | Entity Description | Column Name | Column Description | Data Type | Primary Key | Not Null | Unique |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| Subject  | A branch knowledge taught in the school. The table name of the entity is "Subjects". | subjectId | Primary key of a subject record in the table "Subjects". | INTEGER | True | True   | True |
+| Subjects  | A branch knowledge taught in the school. The table name of the entity is "Subjects". | subjectId | Primary key of a subject record in the table "Subjects". | INTEGER | True | True   | True |
 |   |   | subject | Subject name in acronym, e.g. CGT, ITS. | TEXT | False | True | True |
 
 
+### Terms
 | Entity Name | Entity Description | Column Name | Column Description | Data Type | Primary Key | Not Null | Unique |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | Terms  | The time during which school holds classes. The table name of the entity is "Terms". | termId | Primary key of a term record in the table "Terms". | INTEGER | True | True | True |
@@ -23,8 +25,7 @@ This project involves redesign of the PUC online class schedule application. The
 |   |   | year | Year of the term, e.g. 2014, 2015. | INTEGER | False | True | False |
 
 
-
-
+### Instructors
 | Entity Name | Entity Description | Column Name | Column Description | Data Type | Primary Key | Not Null | Unique |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | Instructors  | The stuffs who teach courses in the school. The table name of the entity is "Instructors". | instructorId | Primary key of an instructor record in the table "Instructors". | INTEGER | True | True | True |
@@ -32,12 +33,14 @@ This project involves redesign of the PUC online class schedule application. The
 |   |   | lastName | Last name of this instructor, e.g. The  last name of data  "Jiang, Keyuan" is "Jiang". | INTEGER | False | True | False |
 
 
+### Buildings
 | Entity Name | Entity Description | Column Name | Column Description | Data Type | Primary Key | Not Null | Unique |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | Buildings  | The building in which instructors teach classes . The table name of the entity is "Buildings". | buildingId | Primary key of a building record in the table "Buildings". | INTEGER | True | True | True |
 |   |   | building | Name of this building, e.g. The building name of data "Gyte (Millard E) Science Bldg - 002" is "Gyte (Millard E) Science Bldg". | TEXT | False | True | True |
 
 
+### Courses
 | Entity Name | Entity Description | Column Name | Column Description | Data Type | Primary Key | Not Null | Unique |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | Courses  | A series of lectures or lessons in a particular subject. The table name of the entity is "Courses". | courseId | Primary key of a course record in the table "Courses" | INTEGER | True | True | True |
@@ -46,6 +49,7 @@ This project involves redesign of the PUC online class schedule application. The
 |   |   | credits | Credit hours of the course. The value of data cell associated with column "Cr Hrs", e.g. "3.0". | TEXT | False | True | False |
 
 
+### Sections
 | Entity Name | Entity Description | Column Name | Column Description | Data Type | Primary Key | Not Null | Unique |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | Sections  | A course section is a specific instance of a course offered during a specific term | sectionId | Primary key of a section record in the table "Sections". | INTEGER | True | True | True |
@@ -73,14 +77,14 @@ This project involves redesign of the PUC online class schedule application. The
 |   |   | notes | The rest information that uncovered by flags "isETIE", "isOnline", "isCanceled" and "isSIA", " **Pre-Requisites**", " **Co-Requisites**" and "View Books" in the comment area. | TEXT | False | True | False |
 
 
+### Schedule Types
 | Entity Name | Entity Description | Column Name | Column Description | Data Type | Primary Key | Not Null | Unique |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | Schedule Types  | Specific name of the schedule for a course section during the weekdays. | instructorId | Primary key of scheduleType record in the table "scheduleTypes". | INTEGER | True | True | True |
 |   |   | scheduleType | The type name of a course section' schedule. "scheduleType" is the value of the data cell associated with column "Type" in raw data, e.g. "Lecture" and "Distance Learning". | TEXT | False | True | False |
 
 
-
-
+### Section Times
 | Entity Name | Entity Description | Column Name | Column Description | Data Type | Primary Key | Not Null | Unique |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | Section Times | The specific time in which the course is taught during scheduled days. The table name of the entity is "SectionTimes". | sectionTimeId | Primary key of a sectionTime record in the table "SectionTimes". | INTEGER | True | True | True |
@@ -90,6 +94,7 @@ This project involves redesign of the PUC online class schedule application. The
 |   |   | timeEnd | The time in which a course section ends during scheduled days. In the raw data, "timeEnd" can be found in the data cell associated with column "Times", e.g. "05:50 PM" in "05:00 PM - 05:50 PM". | TEXT | False | False | False |
 
 
+### Section Locations
 | Entity Name | Entity Description | Column Name | Column Description | Data Type | Primary Key | Not Null | Unique |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | Section Locations | The specific location at which the course is taught during scheduled days. The table name of the entity is "SectionTimes". | sectionTimeId | Primary key of a sectionLocation record in the table "SectionTimes". | INTEGER | True | True | True |
@@ -98,6 +103,7 @@ This project involves redesign of the PUC online class schedule application. The
 |   |   | buildingId | Foreign key of a sectionLocation record indicates which building is scheduled for the course section, associated with the specific building record in table "Buildings". | INTEGER | False | False | False |
 
 
+### Pre-Requisites
 | Entity Name | Entity Description | Column Name | Column Description | Data Type | Primary Key | Not Null | Unique |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | Pre-Requisites | A course that a student must pass before enrolling in the more advanced course. The table name of the entity is "PreRequisites". These data can be found in comment area with keyword "Pre-Requisites:". | prId | Primary key of an Prerequisite record in the table "PreRequisites". | INTEGER | True | True | True |
@@ -105,7 +111,7 @@ This project involves redesign of the PUC online class schedule application. The
 |   |   | subject | The subject name of this prerequisite, e.g. the subject name of data "Pre-Requisites: MA 15300" is "MA". | TEXT | False | True | False |
 |   |   | courseNum | The course code of this prerequisite, e.g. the  course code of data  "Pre-Requisites: MA 15300" is "15300". | TEXT | False | True | False |
 
-
+###Co-Requisites
 | Entity Name | Entity Description | Column Name | Column Description | Data Type | Primary Key | Not Null | Unique |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | Co-Requisites | A course that a student must enroll in at the same time as, or in some cases prior to, enrolling in the desired course. The table name of the entity is "CoRequisites". These data can be found in comment area with keyword "Co-Requisites:". | prId | Primary key of a co-requisite record in the table "CoRequisites". | INTEGER | True | True | True |
