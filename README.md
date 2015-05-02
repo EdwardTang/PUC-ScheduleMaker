@@ -4,10 +4,9 @@
 
 This project involves redesign of the PUC online class schedule application. The deliverable will be a desktop application for PUC class schedules, with easy to use and more functional features. In this report, the redesigned database for storing course information will be introduced in the following sections.
 
-![alt text](https://github.com/EdwardTang/PUC-ScheduleMaker/blob/master/Data%20Model/ITS462_data_model.jpg)
-
 ## Database Logical Design
   Based on the study of data provided by instructor, the unified schema (ERD) for class schedule is created, shown as the following: 
+  ![alt text](https://github.com/EdwardTang/PUC-ScheduleMaker/blob/master/Data%20Model/ITS462_data_model.jpg)
 ## Data Dictionary
 
 | Entity Name | Entity Description | Column Name | Column Description | Data Type | Primary Key | Not Null | Unique |
