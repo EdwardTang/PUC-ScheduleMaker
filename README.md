@@ -13,7 +13,7 @@ This project involves redesign of the PUC online class schedule application. The
 | Entity Name | Entity Description | Column Name | Column Description | Data Type | Primary Key | Not Null | Unique |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | Subject  | A branch knowledge taught in the school. The table name of the entity is "Subjects". | subjectId | Primary key of a subject record in the table "Subjects". | INTEGER | True | True   | True |
-| subject | Subject name in acronym, e.g. CGT, ITS. | TEXT | False | True | True |
+|   |   | subject | Subject name in acronym, e.g. CGT, ITS. | TEXT | False | True | True |
 
 
 | Entity Name | Entity Description | Column Name | Column Description | Data Type | Primary Key | Not Null | Unique |
