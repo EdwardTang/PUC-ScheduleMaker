@@ -122,7 +122,7 @@ This project involves redesign of the PUC online class schedule application. The
 |   |   | courseNum | The course code of this co-requisite, e.g. the  course code of data  "Co-Requisites: CHM 26200" is "26200". | TEXT | False | True | False |
 |   |   | crCourseId | Foreign key of a prerequisite record indicates which course is the co-requisite, associated with the specific course record  in table "Courses".| INTEGER | False | True | False |
 
-**Important notes for "rpCourseId" and "crCourseId"**:
+**Important notes for "prCourseId" and "crCourseId"**:
 To find these foreign  keys, you have to search "Courses" table with the subject name and the course number stored in the corresponding prerequisite record or co-requisite record.  However, you won't find all of matches with single one data set. Because, most prerequisites and some co-requisites are very likely to be taken in the previous semesters.  Therefore, I would suggest you not to deal  with  them until you have consolidated all course schedules in one data store.  
 
 
