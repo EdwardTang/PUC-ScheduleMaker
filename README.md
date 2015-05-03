@@ -114,7 +114,7 @@ This project involves redesign of the PUC online class schedule application. The
 ###Co-Requisites
 | Entity Name | Entity Description | Column Name | Column Description | Data Type | Primary Key | Not Null | Unique |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| Co-Requisites | A course that a student must enroll in at the same time as, or in some cases prior to, enrolling in the desired course. The table name of the entity is "CoRequisites". These data can be found in comment area with keyword "Co-Requisites:". | prId | Primary key of a co-requisite record in the table "CoRequisites". | INTEGER | True | True | True |
+| Co-Requisites | A course that a student must enroll in at the same time as, or in some cases prior to, enrolling in the desired course. The table name of the entity is "CoRequisites". These data can be found in comment area with keyword "Co-Requisites:". | crId | Primary key of a co-requisite record in the table "CoRequisites". | INTEGER | True | True | True |
 |   |   | sectionId | Foreign key of a co-requisite record indicates which course section is required to enroll at same time, associated with the specific course record  in table "Courses" | INTEGER | False | True | False |
 |   |   | subject | The subject name of this co-requisite, e.g. the  subject name of data  "Co-Requisites: CHM 26200" is "CHM". | TEXT | False | True | False |
 |   |   | courseNum | The course code of this co-requisite, e.g. the  course code of data  "Co-Requisites: CHM 26200" is "26200". | TEXT | False | True | False |
