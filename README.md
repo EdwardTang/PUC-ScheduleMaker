@@ -5,7 +5,7 @@
 This project involves redesign of the PUC online class schedule application. The deliverable will be a desktop application for PUC class schedules, with easy to use and more functional features. In this report, the redesigned database for storing course information will be introduced in the following sections.
 
 ## Database Logical Design
-  Based on the study of data provided by instructor, the unified schema (ERD) for class schedule is created, shown as the following: 
+  Based on the study of data provided by instructor, the unified schema (ERD) for class schedule has been created, shown as the following: 
   ![alt text](https://github.com/EdwardTang/PUC-ScheduleMaker/blob/master/Data%20Model/ITS462_data_model.jpg)
 
 ## Data Dictionary
@@ -74,7 +74,7 @@ This project involves redesign of the PUC online class schedule application. The
 |   |   | isSIA | The flag that indicates if a course section is supplemental instruction available. If yes, "isSIA" is 1, otherwise 0. To distinguish a SIA course section, the keyword "supplemental instruction available" is indicated in the values of the data cells which associated with column "Important comments about the section." in raw data, e.g. "Supplemental Instruction Available" in the comment area. | INTEGER | False | True | False |
 |   |   | textBookLink | The hyper link linked to the textbook information of a course section. To found the link, capture the hyper link with the keyword "View Books" in comment area. | TEXT | False | True | False |
 |   |   | CRNLink | The part of URL linked to the details of a course section, manipulated by JavaScript. To found the URL, capture the ```html <a> ``` tag in data cell associated with column "CRN" e.g. "62373". Within the ```html <a> ``` tag, only capture the URL that passed to JavaScript function "openWindow", e.g. In ```html <a href="javascript:openWindow(' /pls/proddad/Webctlg.P\_CtlgProcInput?inputsubjcode=AD&inputsymbol==&inputcrsenumb=22200&inputcoursetype=2&inputreqind=2&callpage=clistquery')">62373</a> ```, the captured URL should be '**/pls/proddad/Webctlg.P\_CtlgProcInput?inputsubjcode=AD&inputsymbol==&inputcrsenumb=22200&inputcoursetype=2&inputreqind=2&callpage=clistquery**'| TEXT | False | True | False |
-|   |   | notes | The information that has not been expressed in flags ("isETIE", "isOnline", "isCanceled" and "isSIA"), associated entities (" **Pre-Requisites**" and " **Co-Requisites**") and "textBookLink" in the comment area. | TEXT | False | True | False |
+|   |   | notes | The information that has not been expressed in flags ("isETIE", "isOnline", "isCanceled" and "isSIA"), associated entities (" **Pre-Requisites**" and " **Co-Requisites**") and "textBookLink" in the comment area,e.g. "A digital camera w/ manual shutter speed & aperture controls is required". | TEXT | False | True | False |
 
 
 ### Schedule Types
