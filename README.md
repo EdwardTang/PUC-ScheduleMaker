@@ -80,7 +80,7 @@ This project involves redesign of the PUC online class schedule application. The
 ### Schedule Types
 | Entity Name | Entity Description | Column Name | Column Description | Data Type | Primary Key | Not Null | Unique |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| Schedule Types  | Specific name of the schedule for a course section during the weekdays. | instructorId | Primary key of scheduleType record in the table "scheduleTypes". | INTEGER | True | True | True |
+| Schedule Types  | Specific name of the schedule for a course section during the weekdays. | scheduleTypeId | Primary key of scheduleType record in the table "scheduleTypes". | INTEGER | True | True | True |
 |   |   | scheduleType | The type name of a course section' schedule. "scheduleType" is the value of the data cell associated with column "Type" in raw data, e.g. "Lecture" and "Distance Learning". | TEXT | False | True | False |
 
 
