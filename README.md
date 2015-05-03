@@ -97,7 +97,7 @@ This project involves redesign of the PUC online class schedule application. The
 ### Section Locations
 | Entity Name | Entity Description | Column Name | Column Description | Data Type | Primary Key | Not Null | Unique |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| Section Locations | The specific location at which the course is taught during scheduled days. The table name of the entity is "SectionTimes". | sectionTimeId | Primary key of a sectionLocation record in the table "SectionTimes". | INTEGER | True | True | True |
+| Section Locations | The specific location at which the course is taught during scheduled days. The table name of the entity is "SectionTimes". | sectionLocationId | Primary key of a sectionLocation record in the table "SectionTimes". | INTEGER | True | True | True |
 |   |   | sectionId | Foreign key of a sectionLocation record indicates which course section is scheduled at this location, associated with the specific section record in table "Sections". | INTEGER | False | True | False |
 |   |   | roomNum | Code of room where the course is taught. "roonNum" can be found in the value of data cell associated with column "Building - Room" e.g. "131" in "Powers (Donald S) Building - 131" | TEXT | False | False | False |
 |   |   | buildingId | Foreign key of a sectionLocation record indicates which building is scheduled for the course section, associated with the specific building record in table "Buildings". | INTEGER | False | False | False |
