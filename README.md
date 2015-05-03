@@ -30,7 +30,7 @@ This project involves redesign of the PUC online class schedule application. The
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | Instructors  | The stuffs who teach courses in the school. The table name of the entity is "Instructors". | instructorId | Primary key of an instructor record in the table "Instructors". | INTEGER | True | True | True |
 |   |   | firstName | First name of this instructor, e.g. The first name of data "Jiang, Keyuan" is "Keyuan". | TEXT | False | True | False |
-|   |   | lastName | Last name of this instructor, e.g. The  last name of data  "Jiang, Keyuan" is "Jiang". | INTEGER | False | True | False |
+|   |   | lastName | Last name of this instructor, e.g. The  last name of data  "Jiang, Keyuan" is "Jiang". | TEXT | False | True | False |
 
 
 ### Buildings
