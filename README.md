@@ -46,7 +46,7 @@ This project involves redesign of the PUC online class schedule application. The
 | Courses  | A series of lectures or lessons in a particular subject. The table name of the entity is "Courses". | courseId | Primary key of a course record in the table "Courses" | INTEGER | True | True | True |
 |   |   | subjectId | Foreign Key of a course record indicates which subject offers this course, associated with the subject record in the table "Subjects". | TEXT | False | True | False |
 |   |   | courseNum | Code of the course. The value of data cells associated with column "#" in project data. e.g. the course number of "AAE 69001"  is "69001". | TEXT | False | True | False |
-|   |   | credits | Credit hours of the course. The value of data cell associated with column "Cr Hrs", e.g. "3.0". | TEXT | False | True | False |
+|   |   | credits | Credit hours of the course. The value of data cell associated with column "Cr Hrs", e.g. "3.0". | INTEGER | False | True | False |
 
 
 ### Sections
