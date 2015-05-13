@@ -119,7 +119,7 @@ namespace ConsolidateDBs
 
         }
 
-  
+       
 
 
         private void btnBrowse_Click(object sender, EventArgs e)
@@ -606,7 +606,7 @@ namespace ConsolidateDBs
             number = numberExtra.Replace(System.Environment.NewLine, "");
             string[] words;
             words = number.Split(new string[] { "(" }, StringSplitOptions.None);
-            number = words[0].Trim().Replace(System.Environment.NewLine, "");
+            number = numberExtra.Trim().Replace(System.Environment.NewLine, "");
             words[1] = words[1].Trim().Replace(")", "");
             switch (words[1])
             {
@@ -633,6 +633,15 @@ namespace ConsolidateDBs
                 startTime = times.Trim();
                 endTime = "";
 
+            }
+        }
+
+
+        private void PrepareTitle(string title)
+        {
+            if (title.Contains("ETIE"))
+            {
+                isETIE = "1";
             }
         }
         private void PrepareSectionDates(string SectionDates)
@@ -672,6 +681,22 @@ namespace ConsolidateDBs
             }
         }
 
+        private void PrepareNotes(string _notes)
+        {
+            if (_notes.Contains("Distance Learning"))
+            {
+                isOnline = "1";
+            }
+            else if (_notes.Contains("ETIE"))
+            {
+                isETIE = "1";
+            }
+            else if (_notes.Contains("Supplemental Instruction"))
+            {
+                isSIA = "1";
+            }
+        }
+
         private void InsertCourseIntoDatabase(SQLiteConnection conn)
         {
             /*Insert Subject*/
@@ -689,35 +714,49 @@ namespace ConsolidateDBs
                 cmd_insert_instructor.ExecuteNonQuery();
             }
 
-            if (!course_list.Contains("++" + subject + number)) //Checks if the Course Number already exists
+            if (!course_list.Contains("++" + subject + number + crHrs)) //Checks if the Course Number already exists
             {
                 /*Insert Course*/
                 SQLiteCommand cmd_insert_course = new SQLiteCommand(conn);
                 SQLiteParameter paramSubjectId = new SQLiteParameter();
-                SQLiteParameter paramcourseNum = new SQLiteParameter();
+                SQLiteParameter paramCourseNum = new SQLiteParameter();
                 SQLiteParameter paramCredits = new SQLiteParameter();
                 cmd_insert_course.CommandText = "INSERT INTO Courses (subjectid, courseNum, credits) VALUES ((SELECT subjectid FROM Subjects WHERE subject = ?), ?, ?); select last_insert_rowid()";
                 paramSubjectId.DbType = DbType.String;
                 paramSubjectId.Value = subject;
-                paramcourseNum.DbType = DbType.String;
-                paramcourseNum.Value = number;
+                paramCourseNum.DbType = DbType.String;
+                paramCourseNum.Value = number;
                 paramCredits.DbType = DbType.String;
                 paramCredits.Value = crHrs;
+
                 cmd_insert_course.Parameters.Add(paramSubjectId);
-                cmd_insert_course.Parameters.Add(paramcourseNum);
+                cmd_insert_course.Parameters.Add(paramCourseNum);
                 cmd_insert_course.Parameters.Add(paramCredits);
 
                 courseID = (Int64)cmd_insert_course.ExecuteScalar();
-                course_list = course_list + "++" + subject + number;
+                course_list = course_list + "++" + subject + number + crHrs;
             }
             else
             {
                 SQLiteCommand cmd_insert_course = new SQLiteCommand(conn);
-                SQLiteParameter paramCourseId = new SQLiteParameter();
-                cmd_insert_course.CommandText = "SELECT courseId FROM Courses WHERE courseNum = ?";
-                paramCourseId.DbType = DbType.String;
-                paramCourseId.Value = number;
-                cmd_insert_course.Parameters.Add(paramCourseId);
+                SQLiteParameter paramSubject = new SQLiteParameter();
+                SQLiteParameter paramCourseNum = new SQLiteParameter();
+                SQLiteParameter paramCredits = new SQLiteParameter();
+                //cmd_insert_course.CommandText = "SELECT courseId FROM Courses WHERE subject= ? AND courseNum = ?";
+                cmd_insert_course.CommandText = "SELECT courseId FROM Courses AS C JOIN Subjects AS S ON S.subjectId = C.subjectId WHERE S.subject= ? AND C.courseNum = ? AND C.credits= ?";
+                paramSubject.DbType = DbType.String;
+                paramSubject.Value = subject;
+                cmd_insert_course.Parameters.Add(paramSubject);
+
+                paramCourseNum.DbType = DbType.String;
+                paramCourseNum.Value = number;
+                cmd_insert_course.Parameters.Add(paramCourseNum);
+
+
+                paramCredits.DbType = DbType.String;
+                paramCredits.Value = crHrs;
+                cmd_insert_course.Parameters.Add(paramCredits);
+
                 courseID = (Int64)cmd_insert_course.ExecuteScalar();
             }
         }
@@ -1036,25 +1075,25 @@ namespace ConsolidateDBs
             conn.ConnectionString = connString;
 
             /*Insert New Term*/
-            //SQLiteCommand cmd_insert_term = new SQLiteCommand(conn);
-            //SQLiteParameter paramQuarter = new SQLiteParameter();
-            //SQLiteParameter paramYear = new SQLiteParameter();
-            //cmd_insert_term.CommandText = "INSERT INTO Terms(quarter, year) SELECT ? , ? WHERE NOT EXISTS(SELECT 1 FROM Terms WHERE quarter= ? AND year = ?)";
-            //paramQuarter.DbType = DbType.String;
-            //paramQuarter.Value = quarter;
-            //paramYear.DbType = DbType.Int16;
-            //paramYear.Value = year;
-            //cmd_insert_term.Parameters.Add(paramQuarter);
-            //cmd_insert_term.Parameters.Add(paramYear);
-            //cmd_insert_term.Parameters.Add(paramQuarter);
-            //cmd_insert_term.Parameters.Add(paramYear);
+            SQLiteCommand cmd_insert_term = new SQLiteCommand(conn);
+            SQLiteParameter paramQuarter = new SQLiteParameter();
+            SQLiteParameter paramYear = new SQLiteParameter();
+            cmd_insert_term.CommandText = "INSERT INTO Terms(quarter, year) SELECT ? , ? WHERE NOT EXISTS(SELECT 1 FROM Terms WHERE quarter= ? AND year = ?)";
+            paramQuarter.DbType = DbType.String;
+            paramQuarter.Value = quarter;
+            paramYear.DbType = DbType.Int16;
+            paramYear.Value = year;
+            cmd_insert_term.Parameters.Add(paramQuarter);
+            cmd_insert_term.Parameters.Add(paramYear);
+            cmd_insert_term.Parameters.Add(paramQuarter);
+            cmd_insert_term.Parameters.Add(paramYear);
             conn.Open();
-            //cmd_insert_term.ExecuteNonQuery();
+            cmd_insert_term.ExecuteNonQuery();
             /*Finish Insert*/
 
             HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
             // doc.Load("../../2009 Fall - On-Line Class Schedule Query Results_original.htm");
-            string dataPath = txtDirectory1.Text + Path.DirectorySeparatorChar + cmbSelectTerm.SelectedItem + ".htm";
+            string dataPath = txtDirectory2.Text + Path.DirectorySeparatorChar + cmbSelectTerm.SelectedItem + ".htm";
             doc.Load(dataPath);
             HtmlNode base_table = doc.DocumentNode.SelectSingleNode("//table [@class='datadisplaytable']");
             foreach (HtmlNode row in base_table.ChildNodes)
@@ -1147,6 +1186,7 @@ namespace ConsolidateDBs
                             title =
                                 row.ChildNodes[1].ChildNodes[5].ChildNodes[11].InnerText.Trim()
                                     .Replace(System.Environment.NewLine, "");
+                            PrepareTitle(title);
                             PrepareSectionDates(row.ChildNodes[1].ChildNodes[5].ChildNodes[13].InnerText);
                             InsertCourseIntoDatabase(conn);
                             break;
@@ -1205,8 +1245,8 @@ namespace ConsolidateDBs
                                         {
                                             if (comment.InnerText.Trim() != string.Empty)
                                             {
-                                                notes = comment.InnerText;
-                                                skip = 0;
+                                                notes = comment.InnerText; 
+                                                PrepareNotes(notes); skip = 0;
                                             }
                                         }
                                     }
@@ -1231,6 +1271,16 @@ namespace ConsolidateDBs
         }
 
         private void txtDirectory2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
         {
 
         }
